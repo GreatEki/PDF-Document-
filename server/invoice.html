@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Invoice.js</title>
+
+		<style>
+			:root {
+				--textColor: #5c5c5c;
+			}
+
+			.roundBtn {
+				background-color: white !important;
+				border-radius: 3em;
+				border: 2px solid red;
+				width: 6.5em;
+				color: red;
+			}
+
+			.companyAddress small {
+				font-size: 14px;
+				line-height: 2em;
+			}
+
+			tbody tr td {
+				color: var(--textColor);
+			}
+		</style>
+	</head>
+
+	<body>
+		<div className="card my-5 p-5">
+			<section className="d-flex flex-row justify-content-between my-3">
+				<div className="d-flex flex-row ">
+					<div className="">
+						<img src="/img/carrot-suite.png" alt="carrot-suite" />
+					</div>
+
+					<div className=" d-flex flex-column ml-4 companyAddress">
+						<h4>XYZ Properties</h4>
+
+						<small> 1, medical road Ikeja,</small>
+
+						<small> Ikeja, Lagos</small>
+
+						<small> Nigeria</small>
+
+						<small> +2348026847945, +2347035925697</small>
+
+						<small> www.carrotsuite.co</small>
+					</div>
+				</div>
+
+				<div className="d-flex flex-column">
+					<h1>Invoice</h1>
+					<h4 className="text-muted">#${invoiceDoc.invoice_number}</h4>
+
+					<h3 className="mt-5">Balance Due</h3>
+
+					<h3>${invoiceDoc.balance}</h3>
+				</div>
+			</section>
+
+			<section className="d-flex justify-content-between my-3">
+				<div className="d-flex flex-column">
+					<h3>Invoice To</h3>
+
+					<h5>
+						{" "}
+						<span> {client.created_date} </span> &nbsp;{" "} {/*
+						<span> {client.user_details.last_name} </span> */}
+					</h5>
+					<h5>23 grret street</h5>
+					<h5>
+						<span className="font-weight-bold"> Phone: </span>{" "} {/*
+						{client.User.Userphones[0].phoneNumber} */}
+					</h5>
+					<h5>
+						{/* <span className="font-weight-bold"> Email: </span> {user.email}
+						*/}
+					</h5>
+				</div>
+
+				<div>
+					<h3></h3>
+					<br />
+					<h3>Invoice Date: ${invoiceDoc.invoiceDate}</h3>
+					<h3>Due Date: ${invoiceDoc.dueDate}</h3>
+					<h3>Marketer: {invoice.salesrep}</h3>
+				</div>
+			</section>
+
+			<section className="table-responsive my-3">
+				<table className="table">
+					<thead>
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">item &amp; Description</th>
+							<th scope="col">Price</th>
+							<th scope="col">Qty</th>
+							<th scope="col">Item Discount</th>
+							<th scope="col">Total</th>
+						</tr>
+					</thead>
+
+					<tbody>
+						{invoice.InvoiceItems ? ( invoice.InvoiceItems.map((item, i) => {
+						return (
+						<tr key="{i}">
+							<td>{item.id}</td>
+							<td>{invoice.description}</td>
+							<td>N {item.quantity}</td>
+							<td>1.00</td>
+							<td>N {item.discount_amount}</td>
+							<td>N {numberWithCommas(item.total)}</td>
+						</tr>
+						); }) ) : (
+						<tr>
+							<td colspan="6" className="text-center">{" "} No Item</td>
+						</tr>
+						)}
+					</tbody>
+				</table>
+			</section>
+
+			<Divider />
+
+			<section className="d-flex flex-row justify-content-between my-3">
+				<div className="d-flex flex-column">
+					<p>Account Name: Property Cloud Tech Limited</p>
+					<p>Account No/Bank: 0114023729 (GTBank)</p>
+					<p>Account No/Bank: 1013173318 (Zenith)</p>
+					<p>Account No/Bank: 0039691957 (Union)</p>
+					<p>TIN: 12001705-0001</p>
+
+					<p>Invoice is payable every 30 days</p>
+				</div>
+
+				<div>
+					<table className="table">
+						<thead>
+							<tr>
+								<th scope="col">Total Due</th>
+								<th scope="col"></th>
+							</tr>
+						</thead>
+
+						<tbody>
+							<tr>
+								<th scope="row">Sub Total</th>
+								<td scope="row">N ${invoiceDoc.subtotal}</td>
+							</tr>
+
+							<tr>
+								<th scope="row">Discount</th>
+								<td>N ${invoiceDoc.discount}</td>
+							</tr>
+
+							<tr>
+								<th scope="row">Exclusive</th>
+								<td>N ${invoiceDoc.exclusive}</td>
+							</tr>
+
+							<tr>
+								<th scope="col">VAT</th>
+								<td>N ${invoiceDoc.vat}</td>
+							</tr>
+
+							<tr>
+								<th scope="row">Total</th>
+								<td>N ${invoiceDoc.total}</td>
+							</tr>
+
+							<tr>
+								<th scope="row">Payment Made</th>
+								<td className="text-danger">(-) N ${invoiceDoc.paymentMade}</td>
+							</tr>
+
+							<tr>
+								<th scope="row">Balance Due</th>
+								<td>N ${invoiceDoc.balance_due}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</section>
+
+			<section>
+				<table className="table">
+					<thead>
+						<tr>
+							<th scope="col">Customer</th>
+							<th scope="col">Prepared By</th>
+							<th scope="col">Authorized By</th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<tr>
+							<td>
+								{" "}
+								<div>
+									<p>
+										<span className="font-weight-bold">Name:</span> Engr. JAMES
+										OPARA{" "}
+									</p>
+									<p>Date &amp; Sign:</p>
+								</div>
+								{" "}
+							</td>
+							<td>
+								<div>
+									<p>Name:</p>
+									<p>Date &amp; Sign:</p>
+								</div>
+							</td>
+
+							<td>
+								<div>
+									<p>Name:</p>
+									<p>Date &amp; Sign:</p>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,55 @@
+.card {
+	background: white;
+	width: 75%;
+	margin: 0 auto;
+	padding: 2em;
+}
+
+.header {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.logo {
+	display: flex;
+	/* width: 100%; */
+}
+
+.header img {
+	width: 100px;
+}
+
+.companyAddress h4 {
+	display: block;
+	padding: 5px;
+}
+.companyAddress small {
+	display: block;
+	padding: 5px;
+	font-family: sans-serif;
+}
+
+.clientInfo {
+	display: flex;
+	justify-content: space-between;
+	margin: 50px 0;
+}
+
+.table {
+	width: 100%;
+}
+
+.summary {
+	display: flex;
+	margin: 50px 0;
+	justify-content: space-between;
+}
+
+.summary div {
+	flex-basis: 50%;
+}
+
+.summary .table {
+	width: 100%;
+}
